@@ -1,0 +1,20 @@
+.criminalsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.criminalInfo {
+  /* display: flex;
+  flex-direction: column;
+  flex-basis: 29%; */
+  border: 1px solid black;
+  margin: 1em;
+  text-indent: 10px;
+  width: 24%;
+}
+
+.noDots {
+  list-style: none;
+  margin-left: -2em;
+}
