@@ -1,33 +1,37 @@
-import { usecriminals } from "./criminalsProvider.js";
+import { usecriminals} from "./criminalsProvider.js";
+import { criminalHTML } from "./criminalHTML.js";
 
-let HTMLTarget = document.querySelector('.criminalsContainer');
+const contentTarget = document.querySelector(".criminalsContainer")
+const eventHub = document.querySelector(".container")
 
+eventHub.addEventListener("crimeChosen", event => {
+    // What crime was chosen?
+    const theCrimeThatWasChosen = event.detail.chosenCrime
+
+    // Get the criminals
+    let criminalsToDisplay = usecriminals()
+
+    if (theCrimeThatWasChosen !== "0") {
+        // Filter the list of criminal who committed the crime
+        criminalsToDisplay = criminalsToDisplay.filter(criminal => {
+            if (criminal.conviction === theCrimeThatWasChosen) {
+                return true
+            }
+            return false
+        })
+    }
+    render(criminalsToDisplay)
+})
+
+const render = criminalsToRender => {
+    contentTarget.innerHTML = criminalsToRender.map(
+        (criminalObject) => {
+            return criminalHTML(criminalObject)
+        }
+    ).join("")
+}
 
 export const criminalMaker = () => {
-  const criminalData = usecriminals();
-
-  for (const criminal of criminalData) {
-    HTMLTarget.innerHTML += `
-      <section class='criminalInfo'>
-        <h3>
-          ${criminal.name}
-        </h3>
-        <ul class='noDots'>
-          <li>
-            Age: ${criminal.age}
-          </li>
-          <li>
-            Crime: ${criminal.conviction}
-          </li>
-          <li>
-            Term Start: ${new Date(criminal.incarceration.start).toLocaleDateString('en-US')}
-          </li>
-          <li>
-            Term End: ${new Date(criminal.incarceration.end).toLocaleDateString('en-US')}
-          </li>
-        </ul>
-      </section>
-    `
-    console.log(criminal.name)
-  }
+    const criminals = usecriminals()
+    render(criminals)
 }
