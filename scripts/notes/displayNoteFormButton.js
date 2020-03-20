@@ -1,4 +1,4 @@
-const contentTarget = document.querySelector(".noteForm__button")
+const contentTarget = document.querySelector("#noteForm__Button")
 const eventHub = document.querySelector(".container")
 
 

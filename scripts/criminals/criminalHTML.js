@@ -18,6 +18,7 @@ export const criminalHTML = (criminal) => {
             Term End: ${new Date(criminal.incarceration.end).toLocaleDateString('en-US')}
           </li>
         </ul>
+        <button id="associates--${criminal.id}">Show Associates</button>
       </section>
     `
 }

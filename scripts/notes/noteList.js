@@ -3,16 +3,31 @@ import { Note } from "./noteHTML.js"
 
 const HTMLTarget = document.querySelector(".notesContainer")
 const eventHub = document.querySelector(".container")
+let visibility = false;
 
 eventHub.addEventListener("noteStateChanged", customEvent => {
     render()
 })
 
 eventHub.addEventListener("allNotesClicked", customEvent => {
-    render()
+  visibility = !visibility
+
+  if (visibility) {
+      HTMLTarget.classList.remove("invisible")
+  }
+  else {
+      HTMLTarget.classList.add("invisible")
+  }
 })
 
 const render = () => {
+    if (visibility) {
+        HTMLTarget.classList.remove("invisible")
+    }
+    else {
+        HTMLTarget.classList.add("invisible")
+    }
+
     getNotes().then(() => {
         const allTheNotes = useNotes()
 
@@ -21,5 +36,10 @@ const render = () => {
                 return Note(currentNoteObject)
             }
         ).join("")
-    })
+  })
+}
+
+
+export const NoteList = () => {
+  render
 }
