@@ -41,5 +41,5 @@ const render = () => {
 
 
 export const NoteList = () => {
-  render
+  render()
 }
